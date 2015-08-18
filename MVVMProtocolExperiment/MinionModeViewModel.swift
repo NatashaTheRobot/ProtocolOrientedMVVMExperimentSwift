@@ -8,9 +8,12 @@
 
 import UIKit
 
-struct MinionModeViewModel: SwitchWithTextCellProtocol {
+struct MinionModeViewModel: SwitchWithTextCellDataSource {
     var title = "Minion Mode!!!"
     var switchOn = true
+}
+
+extension MinionModeViewModel: SwitchWithTextCellDelegate {
     
     func onSwitchTogleOn(on: Bool) {
         if on {
@@ -20,7 +23,7 @@ struct MinionModeViewModel: SwitchWithTextCellProtocol {
         }
     }
     
-    func switchColor() -> UIColor {
+    var switchColor: UIColor {
         return .yellowColor()
     }
 }
