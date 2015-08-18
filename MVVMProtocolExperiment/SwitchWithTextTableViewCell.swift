@@ -48,14 +48,14 @@ class SwitchWithTextTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func configure(withDataSource dataSource: SwitchWithTextCellDataSource, stylingDelegate: SwitchWithTextCellDelegate?) {
+    func configure(withDataSource dataSource: SwitchWithTextCellDataSource, delegate: SwitchWithTextCellDelegate?) {
         self.dataSource = dataSource
-        self.delegate = stylingDelegate
+        self.delegate = delegate
         
         label.text = dataSource.title
         switchToggle.on = dataSource.switchOn
         // color option added!
-        switchToggle.onTintColor = stylingDelegate?.switchColor
+        switchToggle.onTintColor = delegate?.switchColor
     }
 
     @IBAction func onSwitchToggle(sender: UISwitch) {

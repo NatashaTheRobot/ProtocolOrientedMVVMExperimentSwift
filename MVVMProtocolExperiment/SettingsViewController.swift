@@ -36,7 +36,8 @@ class SettingsViewController: UITableViewController {
                 let cell = tableView.dequeueReusableCellWithIdentifier("SwitchWithTextTableViewCell", forIndexPath: indexPath) as! SwitchWithTextTableViewCell
                 
                 // this is where the magic happens!
-                cell.configure(withDelegate: MinionModeViewModel())
+                let viewModel = MinionModeViewModel()
+                cell.configure(withDataSource: viewModel, delegate: viewModel)
                 return cell
             }
         }
