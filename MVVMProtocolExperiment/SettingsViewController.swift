@@ -11,7 +11,7 @@ import UIKit
 class SettingsViewController: UITableViewController {
 
     enum Setting: Int {
-        case MinionMode
+        case minionMode
         // other settings here
     }
     
@@ -21,19 +21,19 @@ class SettingsViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(tableView: UITableView,
+    override func tableView(_ tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int
     {
         return 1
     }
 
-    override func tableView(tableView: UITableView,
-        cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         if let setting = Setting(rawValue: indexPath.row) {
             switch setting {
-            case .MinionMode:
-                let cell = tableView.dequeueReusableCellWithIdentifier("SwitchWithTextTableViewCell", forIndexPath: indexPath) as! SwitchWithTextTableViewCell
+            case .minionMode:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchWithTextTableViewCell", for: indexPath) as! SwitchWithTextTableViewCell
                 
                 // this is where the magic happens!
                 let viewModel = MinionModeViewModel()
@@ -42,7 +42,7 @@ class SettingsViewController: UITableViewController {
             }
         }
         
-        return tableView.dequeueReusableCellWithIdentifier("defaultCell", forIndexPath: indexPath)
+        return tableView.dequeueReusableCell(withIdentifier: "defaultCell", for: indexPath)
     }
 
 }
