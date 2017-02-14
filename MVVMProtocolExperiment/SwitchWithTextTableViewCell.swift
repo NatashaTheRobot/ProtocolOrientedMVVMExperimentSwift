@@ -14,7 +14,7 @@ protocol SwitchWithTextCellDataSource {
 }
 
 protocol SwitchWithTextCellDelegate {
-    func onSwitchTogleOn(on: Bool)
+    func onSwitchTogleOn(_ on: Bool)
     
     var switchColor: UIColor { get }
     var textColor: UIColor { get }
@@ -24,25 +24,25 @@ protocol SwitchWithTextCellDelegate {
 extension SwitchWithTextCellDelegate {
     
     var switchColor: UIColor {
-        return .purpleColor()
+        return .purple
     }
     
     var textColor: UIColor {
-        return .blackColor()
+        return .black
     }
     
     var font: UIFont {
-        return .systemFontOfSize(17)
+        return .systemFont(ofSize: 17)
     }
 }
 
 class SwitchWithTextTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var label: UILabel!
-    @IBOutlet private weak var switchToggle: UISwitch!
+    @IBOutlet fileprivate weak var label: UILabel!
+    @IBOutlet fileprivate weak var switchToggle: UISwitch!
 
-    private var dataSource: SwitchWithTextCellDataSource?
-    private var delegate: SwitchWithTextCellDelegate?
+    fileprivate var dataSource: SwitchWithTextCellDataSource?
+    fileprivate var delegate: SwitchWithTextCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,13 +53,13 @@ class SwitchWithTextTableViewCell: UITableViewCell {
         self.delegate = delegate
         
         label.text = dataSource.title
-        switchToggle.on = dataSource.switchOn
+        switchToggle.isOn = dataSource.switchOn
         // color option added!
         switchToggle.onTintColor = delegate?.switchColor
     }
 
-    @IBAction func onSwitchToggle(sender: UISwitch) {
-        delegate?.onSwitchTogleOn(sender.on)
+    @IBAction func onSwitchToggle(_ sender: UISwitch) {
+        delegate?.onSwitchTogleOn(sender.isOn)
     }
 }
 

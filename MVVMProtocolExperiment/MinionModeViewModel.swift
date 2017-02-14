@@ -15,7 +15,7 @@ struct MinionModeViewModel: SwitchWithTextCellDataSource {
 
 extension MinionModeViewModel: SwitchWithTextCellDelegate {
     
-    func onSwitchTogleOn(on: Bool) {
+    func onSwitchTogleOn(_ on: Bool) {
         if on {
             print("The Minions are here to stay!")
         } else {
@@ -24,6 +24,6 @@ extension MinionModeViewModel: SwitchWithTextCellDelegate {
     }
     
     var switchColor: UIColor {
-        return .yellowColor()
+        return .yellow
     }
 }
