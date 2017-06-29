@@ -9,7 +9,7 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
-
+    
     enum Setting: Int {
         case minionMode
         // other settings here
@@ -18,17 +18,17 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView,
-        numberOfRowsInSection section: Int) -> Int
+                            numberOfRowsInSection section: Int) -> Int
     {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath) -> UITableViewCell
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         if let setting = Setting(rawValue: indexPath.row) {
             switch setting {
@@ -37,12 +37,13 @@ class SettingsViewController: UITableViewController {
                 
                 // this is where the magic happens!
                 let viewModel = MinionModeViewModel()
-                cell.configure(withDataSource: viewModel, delegate: viewModel)
+                cell.configure(presenter: viewModel)
+                
                 return cell
             }
         }
         
         return tableView.dequeueReusableCell(withIdentifier: "defaultCell", for: indexPath)
     }
-
+    
 }

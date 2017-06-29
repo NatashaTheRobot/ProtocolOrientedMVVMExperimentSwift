@@ -8,22 +8,26 @@
 
 import UIKit
 
-struct MinionModeViewModel: SwitchWithTextCellDataSource {
-    var title = "Minion Mode!!!"
-    var switchOn = true
+struct MinionModeViewModel: SwitchWithTextViewPresentable {
+    
 }
 
-extension MinionModeViewModel: SwitchWithTextCellDelegate {
+extension MinionModeViewModel {
+    var text: String { return "Minion mode" }
+    var textColor: UIColor { return .black }
+    var font: UIFont { return .systemFont(ofSize: 17)}
+}
+
+extension MinionModeViewModel {
+    var switchOn: Bool { return false}
+    var switchColor: UIColor { return .yellow }
     
-    func onSwitchTogleOn(_ on: Bool) {
+    func onSwitchToggleOn(_ on: Bool) {
         if on {
-            print("The Minions are here to stay!")
-        } else {
-            print("The Minions went out to play!")
+            print("The minion is on")
         }
-    }
-    
-    var switchColor: UIColor {
-        return .yellow
+        else {
+            print("The minion is off")
+        }
     }
 }
