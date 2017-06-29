@@ -8,74 +8,74 @@
 
 import UIKit
 
-protocol SwitchWithTextCellDataSource {
-    var title: String { get }
-    var switchOn: Bool { get }
-}
-
-protocol SwitchWithTextCellDelegate {
-    func onSwitchTogleOn(_ on: Bool)
-    
-    var switchColor: UIColor { get }
+protocol TextPresentable {
+    var text: String { get }
     var textColor: UIColor { get }
     var font: UIFont { get }
 }
 
-extension SwitchWithTextCellDelegate {
-    
+protocol SwitchPresentable {
+    var switchOn: Bool { get }
+    var switchColor: UIColor { get }
+    func onSwitchToggleOn(_ on: Bool)
+}
+
+extension SwitchPresentable {
     var switchColor: UIColor {
-        return .purple
-    }
-    
-    var textColor: UIColor {
-        return .black
-    }
-    
-    var font: UIFont {
-        return .systemFont(ofSize: 17)
+        return UIColor.yellow
     }
 }
 
-class SwitchWithTextTableViewCell: UITableViewCell {
+protocol ImagePresentable {
+    var imageName: String { get }
+}
 
+protocol TextFieldPresentable {
+    var placeholder: String { get }
+    var text: String { get }
+    
+    func onTextFieldDidEndEditing(textField: UITextField)
+}
+
+typealias SwitchWithTextViewPresentable = TextPresentable & SwitchPresentable
+
+class SwitchWithTextTableViewCell: UITableViewCell {
+    
     @IBOutlet fileprivate weak var label: UILabel!
     @IBOutlet fileprivate weak var switchToggle: UISwitch!
-
-    fileprivate var dataSource: SwitchWithTextCellDataSource?
-    fileprivate var delegate: SwitchWithTextCellDelegate?
+    
+    fileprivate var delegate: SwitchWithTextViewPresentable?
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    func configure(withDataSource dataSource: SwitchWithTextCellDataSource, delegate: SwitchWithTextCellDelegate?) {
-        self.dataSource = dataSource
-        self.delegate = delegate
+    func configure(presenter: SwitchWithTextViewPresentable) {
+        delegate = presenter
         
-        label.text = dataSource.title
-        switchToggle.isOn = dataSource.switchOn
-        // color option added!
-        switchToggle.onTintColor = delegate?.switchColor
+        //configure UI component
+        label.text = presenter.text
+        switchToggle.isOn = presenter.switchOn
     }
-
+    
     @IBAction func onSwitchToggle(_ sender: UISwitch) {
-        delegate?.onSwitchTogleOn(sender.isOn)
+        delegate?.onSwitchToggleOn(sender.isOn)
     }
 }
 
-// BEFORE 
+// BEFORE
 //class SwitchWithTextTableViewCell: UITableViewCell {
-//    
+//
 //    @IBOutlet private weak var label: UILabel!
 //    @IBOutlet private weak var switchToggle: UISwitch!
-//    
+//
 //    typealias onSwitchToggleHandlerType = (switchOn: Bool) -> Void
 //    private var onSwitchToggleHandler: onSwitchToggleHandlerType?
-//    
+//
 //    override func awakeFromNib() {
 //        super.awakeFromNib()
 //    }
-//    
+//
 //    func configure(withTitle title: String,
 //        switchOn: Bool,
 //        switchColor: UIColor = .purpleColor(),
@@ -85,10 +85,10 @@ class SwitchWithTextTableViewCell: UITableViewCell {
 //        switchToggle.on = switchOn
 //        // color option added!
 //        switchToggle.onTintColor = switchColor
-//        
+//
 //        self.onSwitchToggleHandler = onSwitchToggleHandler
 //    }
-//    
+//
 //    @IBAction func onSwitchToggle(sender: UISwitch) {
 //        onSwitchToggleHandler?(switchOn: sender.on)
 //    }
