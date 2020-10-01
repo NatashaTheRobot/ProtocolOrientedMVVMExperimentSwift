@@ -1,4 +1,5 @@
-# ProtocolOrientedMVVMExperimentSwift
-Protocol-Oriented MVVM Experiment in Swift
+# Swift Protocol (For Learning Only)
 
-Blog post here: http://natashatherobot.com/swift-2-0-protocol-oriented-mvvm/
+This module is for learning swift protocol with MVVM architecture.
+
+MVVM (Model-View-Viewmodel) architecture is a very effective architecture for bulding any application. And, after using this our code is easy to understandable and usefull.
